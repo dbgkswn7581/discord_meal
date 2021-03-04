@@ -1,3 +1,3 @@
 discord.py
-beatifulsoup4=4.0.0b3
+beatifulsoup4.py
 asyncio
