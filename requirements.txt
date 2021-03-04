@@ -1,2 +1,5 @@
 discord.py
+datetime.py
+BeatifulSoup.py
+urllib.request.py
 asyncio
