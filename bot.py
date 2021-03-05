@@ -108,6 +108,18 @@ class makeError(Exception):
     def __init__(self):
         super().__init__('급식 정보가 없습니다.')
 
+
+def set_meal():
+    global today_lunch, today_dinner, tomorrow_dinner, tomorrow_lunch
+    # ----------------------------
+
+    today_lunch = get_meal_lunch(today)
+    today_dinner = get_meal_dinner(today)
+
+    # ----------------------------
+
+    tomorrow_lunch = get_meal_lunch(tomorrow)
+    tomorrow_dinner = get_meal_dinner(tomorrow)
 #================================================================================================================================================
 
 @client.event
@@ -121,15 +133,9 @@ async def on_ready():
     set_today()
     set_tomorrow()
 
-    # ----------------------------
+    set_meal()
 
-    today_lunch = get_meal_lunch(today)
-    today_dinner = get_meal_dinner(today)
-
-    # ----------------------------
-
-    tomorrow_lunch = get_meal_lunch(tomorrow)
-    tomorrow_dinner = get_meal_dinner(tomorrow)
+    
 
 
 
@@ -182,6 +188,8 @@ async def meal(ctx, *text):
 
 @client.command(name="오늘")
 async def meal(ctx):
+    set_meal()
+
     if today_lunch == "Nope" and today_dinner == "Nope":
         embed = discord.Embed(title = "Error",
         description = "급식 정보가 없습니다.", color = discord.Color.red()
@@ -211,6 +219,7 @@ async def meal(ctx):
 
 @client.command(name="내일")
 async def meal(ctx):
+    set_meal()
     if tomorrow_lunch == "Nope" and tomorrow_dinner == "Nope":
         embed = discord.Embed(title = "Error",
         description = "급식 정보가 없습니다.", color = discord.Color.red()
