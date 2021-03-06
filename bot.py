@@ -36,8 +36,49 @@ def set_tomorrow():
 
     tomorrow = str(int(today) + 1)
 
+    # tom_month = int(tomorrow[4:6])
+    # tom_day = int(tomorrow[6:])
+
+    # if tom_month == 3:
+    #     if tom_day >= 32:
+    #         tomorrow = str("20210401")
+    # elif tom_month ==  4 :
+    #     if tom_day >=  31 :
+    #         tomorrow = str("20210501")
+    # elif tom_month ==  5 :
+    #     if tom_day >=  32 :
+    #         tomorrow = str("20210601")
+    # elif tom_month ==  6 :
+    #     if tom_day >=  31 :
+    #         tomorrow = str("20210701")
+    # elif tom_month ==  7 :
+    #     if tom_day >=  32 :
+    #         tomorrow = str("20210801")
+    # elif tom_month ==  8 :
+    #     if tom_day >=  32 :
+    #         tomorrow = str("20210901")
+    # elif tom_month ==  9 :
+    #     if tom_day >=  31 :
+    #         tomorrow = str("20211001")
+    # elif tom_month ==  10 :
+    #     if tom_day >=  32 :
+    #         tomorrow = str("20211101")
+    # elif tom_month ==  11 :
+    #     if tom_day >=  31 :
+    #         tomorrow = str("20211201")
+    # elif tom_month ==  12 :
+    #     if tom_day >=  32 :
+    #         tomorrow = str("20220101")
+    # elif tom_month ==  1 :
+    #     if tom_day >=  32 :
+    #         tomorrow = str("20220201")
+    # elif tom_month ==  2 :
+    #     if tom_day >=  29 :
+    #         tomorrow = str('20220301')
+
     print("tomorrow is ", end='')
     print(tomorrow)
+    
 #알레르기 성분 번호 삭제    
 def num_remove(food):
     food = str(food).replace("10.", "")
@@ -104,6 +145,7 @@ def get_meal_dinner(day):
 
         return "Nope"
 
+#에러 발생
 class makeError(Exception):
     def __init__(self):
         super().__init__('급식 정보가 없습니다.')
@@ -154,7 +196,17 @@ async def meal(ctx, *text):
         txt += tmp
         txt += ' '
 
+
     day = "2021" + txt
+
+    if len(day) != 8:
+        embed = discord.Embed(title = "Error",
+        description = "잘못된 날짜 입니다.", color = discord.Color.dark_red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    
+
 
     day_lunch = get_meal_lunch(day)
     day_dinner = get_meal_dinner(day)
