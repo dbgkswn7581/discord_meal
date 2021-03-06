@@ -198,6 +198,7 @@ async def meal(ctx, *text):
 
 
     day = "2021" + txt
+    day = day.replace(" ", "")
 
     if len(day) != 8:
         embed = discord.Embed(title = "Error",
@@ -205,6 +206,8 @@ async def meal(ctx, *text):
         )
         await ctx.send(embed=embed)
         raise makeError
+ 
+        
     
 
 
