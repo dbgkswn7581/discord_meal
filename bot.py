@@ -188,6 +188,7 @@ async def meal(ctx, *text):
 
 @client.command(name="오늘")
 async def meal(ctx):
+    set_today()
     set_meal()
 
     if today_lunch == "Nope" and today_dinner == "Nope":
@@ -219,6 +220,7 @@ async def meal(ctx):
 
 @client.command(name="내일")
 async def meal(ctx):
+    set_today()
     set_meal()
     if tomorrow_lunch == "Nope" and tomorrow_dinner == "Nope":
         embed = discord.Embed(title = "Error",
