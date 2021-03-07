@@ -308,7 +308,7 @@ async def meal(ctx, *text):
         raise makeError
 
     embed = discord.Embed(title = "전라고등학교 급식",
-    description="날짜 : %s년 %s월 %s일" %(day[:4], day[5:6], day[7:]), color=discord.Color.blue())
+    description="날짜 : %s년 %s월 %s일" %(day[:4], day[5:6], day[6:]), color=discord.Color.blue())
 
     embed.add_field(name="중식", value=list_to_str(day_lunch), inline=False)
     embed.add_field(name="석식", value=list_to_str(day_dinner), inline=False)
@@ -361,7 +361,7 @@ async def meal(ctx, *text):
         raise makeError
 
     embed = discord.Embed(title = "전라고등학교 급식",
-    description="날짜 : %s년 %s월 %s일" %(day[:4], day[5:6], day[7:]), color=discord.Color.blue())
+    description="날짜 : %s년 %s월 %s일" %(day[:4], day[5:6], day[6:]), color=discord.Color.blue())
 
     embed.add_field(name="중식", value=list_to_str(day_lunch), inline=False)
     embed.add_field(name="석식", value=list_to_str(day_dinner), inline=False)
@@ -414,7 +414,7 @@ async def meal(ctx, *text):
         raise makeError
 
     embed = discord.Embed(title = "전라고등학교 급식",
-    description="날짜 : %s년 %s월 %s일" %(day[:4], day[5:6], day[7:]), color=discord.Color.blue())
+    description="날짜 : %s년 %s월 %s일" %(day[:4], day[5:6], day[6:]), color=discord.Color.blue())
 
     embed.add_field(name="중식", value=list_to_str(day_lunch), inline=False)
     embed.add_field(name="석식", value=list_to_str(day_dinner), inline=False)
@@ -717,7 +717,8 @@ async def meal(ctx):
     
 
     await ctx.send(embed=embed)
-    
+
+client.remove_command("help")
 @client.command(name="help")
 async def meal(ctx):
     embed = discord.Embed(title = "명령어",
