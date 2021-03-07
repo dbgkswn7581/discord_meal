@@ -457,5 +457,17 @@ async def meal(ctx):
     )
     await ctx.send(embed=embed)
 
+@client.command(name="도움말")
+async def meal(ctx):
+    embed = discord.Embed(title = "명령어",
+    description = "전라고등학교 급식 서비스 봇 명령어" , color = discord.Color.purple()
+    )
+
+    embed.add_field(name="#오늘", value="오늘 날짜의 급식을 확인합니다.", inline=False)
+    embed.add_field(name="#내일", value="내일 날짜의 급식을 확인합니다.", inline=False)
+    embed.add_field(name="#급식 MMDD", value="MM월 DD일의 급식을 확인합니다.\nex) #급식 0305 → 3월 5일의 급식을 확인합니다.", inline=False)
+    
+
+    await ctx.send(embed=embed)
 
 client.run(os.environ['token'])
