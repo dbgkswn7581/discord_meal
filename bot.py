@@ -11,6 +11,8 @@ import time
 
 client = commands.Bot(command_prefix='#')
 
+
+
 def get_time():
     global now, timon, tiday, tihour
     
@@ -19,6 +21,7 @@ def get_time():
     tiday = now.tm_mday
     tihour = now.tm_hour
     tihour = tihour + 9
+
     if tihour >= 24:
         tihour = tihour - 24
         tiday += 1
@@ -75,20 +78,24 @@ def get_time():
 #오늘 날짜 
 def set_today():
     global today
-
+    get_time()
 #     today_year = str(datetime.today().year)
 #     today_month = str(datetime.today().month)
 #     today_day = str(datetime.today().day)
-    today_year = int(now.tm_year)
+    today_year = str(int(now.tm_year))
     today_month = timon
     today_day = tiday
 
 
-    if len(today_month) == 1:
+    if len(str(today_month)) == 1:
         today_month = '0' + str(today_month)
+    else:
+        today_month = str(today_month)
 
-    if len(today_day) == 1:
+    if len(str(today_day)) == 1:
         today_day = '0' + str(today_day)
+    else:
+        today_day = str(today_day)
 
     today = today_year+today_month+today_day
 
