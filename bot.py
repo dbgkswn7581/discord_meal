@@ -315,7 +315,7 @@ async def meal(ctx, *text):
 
     await ctx.send(embed=embed)
 
-@client.command(name="ㄱ")
+@client.command(name="ㄱㅅ")
 async def meal(ctx, *text):
 
     txt = ''
