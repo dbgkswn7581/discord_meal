@@ -347,7 +347,135 @@ async def meal(ctx):
 
     await ctx.send(embed=embed)
 
+@client.command(name="ㅇㄴ")
+async def meal(ctx):
+    set_today()
+    set_meal_today()
+
+    if today_lunch == "Nope" and today_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif today_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "저녁 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif today_lunch == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "점심 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+
+    embed = discord.Embed(title = "전라고등학교 급식",
+    description="날짜 : %s년 %s월 %s일" %(today[:4], today[5:6], today[7:]), color=discord.Color.blue())
+
+    embed.add_field(name="중식", value=list_to_str(today_lunch), inline=False)
+    embed.add_field(name="석식", value=list_to_str(today_dinner), inline=False)
+
+    await ctx.send(embed=embed)
+
+@client.command(name="ds")
+async def meal(ctx):
+    set_today()
+    set_meal_today()
+
+    if today_lunch == "Nope" and today_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif today_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "저녁 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif today_lunch == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "점심 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+
+    embed = discord.Embed(title = "전라고등학교 급식",
+    description="날짜 : %s년 %s월 %s일" %(today[:4], today[5:6], today[7:]), color=discord.Color.blue())
+
+    embed.add_field(name="중식", value=list_to_str(today_lunch), inline=False)
+    embed.add_field(name="석식", value=list_to_str(today_dinner), inline=False)
+
+    await ctx.send(embed=embed)
+    
 @client.command(name="내일")
+async def meal(ctx):
+    set_tomorrow()
+    set_meal_tomorrow()
+
+    if tomorrow_lunch == "Nope" and tomorrow_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif tomorrow_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "저녁 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif tomorrow_lunch == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "점심 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+
+    embed = discord.Embed(title = "전라고등학교 급식",
+    description="날짜 : %s년 %s월 %s일" %(tomorrow[:4], tomorrow[5:6], tomorrow[7:]), color=discord.Color.blue())
+
+    embed.add_field(name="중식", value=list_to_str(tomorrow_lunch), inline=False)
+    embed.add_field(name="석식", value=list_to_str(tomorrow_dinner), inline=False)
+
+    await ctx.send(embed=embed)
+    
+@client.command(name="ㄴㅇ")
+async def meal(ctx):
+    set_tomorrow()
+    set_meal_tomorrow()
+
+    if tomorrow_lunch == "Nope" and tomorrow_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif tomorrow_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "저녁 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif tomorrow_lunch == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "점심 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+
+    embed = discord.Embed(title = "전라고등학교 급식",
+    description="날짜 : %s년 %s월 %s일" %(tomorrow[:4], tomorrow[5:6], tomorrow[7:]), color=discord.Color.blue())
+
+    embed.add_field(name="중식", value=list_to_str(tomorrow_lunch), inline=False)
+    embed.add_field(name="석식", value=list_to_str(tomorrow_dinner), inline=False)
+
+    await ctx.send(embed=embed)
+    
+@client.command(name="sd")
 async def meal(ctx):
     set_tomorrow()
     set_meal_tomorrow()
@@ -458,6 +586,58 @@ async def meal(ctx):
     await ctx.send(embed=embed)
 
 @client.command(name="도움말")
+async def meal(ctx):
+    embed = discord.Embed(title = "명령어",
+    description = "전라고등학교 급식 서비스 봇 명령어" , color = discord.Color.purple()
+    )
+
+    embed.add_field(name="#오늘", value="오늘 날짜의 급식을 확인합니다.", inline=False)
+    embed.add_field(name="#내일", value="내일 날짜의 급식을 확인합니다.", inline=False)
+    embed.add_field(name="#급식 MMDD", value="MM월 DD일의 급식을 확인합니다.\nex) #급식 0305 → 3월 5일의 급식을 확인합니다.", inline=False)
+    
+
+    await ctx.send(embed=embed)
+
+@client.command(name="명령어")
+async def meal(ctx):
+    embed = discord.Embed(title = "명령어",
+    description = "전라고등학교 급식 서비스 봇 명령어" , color = discord.Color.purple()
+    )
+
+    embed.add_field(name="#오늘", value="오늘 날짜의 급식을 확인합니다.", inline=False)
+    embed.add_field(name="#내일", value="내일 날짜의 급식을 확인합니다.", inline=False)
+    embed.add_field(name="#급식 MMDD", value="MM월 DD일의 급식을 확인합니다.\nex) #급식 0305 → 3월 5일의 급식을 확인합니다.", inline=False)
+    
+
+    await ctx.send(embed=embed)
+    
+@client.command(name="help")
+async def meal(ctx):
+    embed = discord.Embed(title = "명령어",
+    description = "전라고등학교 급식 서비스 봇 명령어" , color = discord.Color.purple()
+    )
+
+    embed.add_field(name="#오늘", value="오늘 날짜의 급식을 확인합니다.", inline=False)
+    embed.add_field(name="#내일", value="내일 날짜의 급식을 확인합니다.", inline=False)
+    embed.add_field(name="#급식 MMDD", value="MM월 DD일의 급식을 확인합니다.\nex) #급식 0305 → 3월 5일의 급식을 확인합니다.", inline=False)
+    
+
+    await ctx.send(embed=embed)
+
+@client.command(name="?")
+async def meal(ctx):
+    embed = discord.Embed(title = "명령어",
+    description = "전라고등학교 급식 서비스 봇 명령어" , color = discord.Color.purple()
+    )
+
+    embed.add_field(name="#오늘", value="오늘 날짜의 급식을 확인합니다.", inline=False)
+    embed.add_field(name="#내일", value="내일 날짜의 급식을 확인합니다.", inline=False)
+    embed.add_field(name="#급식 MMDD", value="MM월 DD일의 급식을 확인합니다.\nex) #급식 0305 → 3월 5일의 급식을 확인합니다.", inline=False)
+    
+
+    await ctx.send(embed=embed)
+    
+@client.command(name="command")
 async def meal(ctx):
     embed = discord.Embed(title = "명령어",
     description = "전라고등학교 급식 서비스 봇 명령어" , color = discord.Color.purple()
