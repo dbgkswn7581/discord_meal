@@ -315,6 +315,113 @@ async def meal(ctx, *text):
 
     await ctx.send(embed=embed)
 
+@client.command(name="ㄱ")
+async def meal(ctx, *text):
+
+    txt = ''
+    for tmp in text:
+        txt += tmp
+        txt += ' '
+
+
+    day = "2021" + txt
+    day = day.replace(" ", "")
+
+    if len(day) != 8:
+        embed = discord.Embed(title = "Error",
+        description = "잘못된 날짜 입니다.", color = discord.Color.dark_red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+ 
+        
+    
+
+
+    day_lunch = get_meal_lunch(day)
+    day_dinner = get_meal_dinner(day)
+
+    if day_lunch == "Nope" and day_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif day_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "저녁 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif day_lunch == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "점심 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+
+    embed = discord.Embed(title = "전라고등학교 급식",
+    description="날짜 : %s년 %s월 %s일" %(day[:4], day[5:6], day[7:]), color=discord.Color.blue())
+
+    embed.add_field(name="중식", value=list_to_str(day_lunch), inline=False)
+    embed.add_field(name="석식", value=list_to_str(day_dinner), inline=False)
+
+    await ctx.send(embed=embed)
+
+@client.command(name="rt")
+async def meal(ctx, *text):
+
+    txt = ''
+    for tmp in text:
+        txt += tmp
+        txt += ' '
+
+
+    day = "2021" + txt
+    day = day.replace(" ", "")
+
+    if len(day) != 8:
+        embed = discord.Embed(title = "Error",
+        description = "잘못된 날짜 입니다.", color = discord.Color.dark_red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+ 
+        
+    
+
+
+    day_lunch = get_meal_lunch(day)
+    day_dinner = get_meal_dinner(day)
+
+    if day_lunch == "Nope" and day_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif day_dinner == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "저녁 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+    elif day_lunch == "Nope":
+        embed = discord.Embed(title = "Error",
+        description = "점심 급식 정보가 없습니다.", color = discord.Color.red()
+        )
+        await ctx.send(embed=embed)
+        raise makeError
+
+    embed = discord.Embed(title = "전라고등학교 급식",
+    description="날짜 : %s년 %s월 %s일" %(day[:4], day[5:6], day[7:]), color=discord.Color.blue())
+
+    embed.add_field(name="중식", value=list_to_str(day_lunch), inline=False)
+    embed.add_field(name="석식", value=list_to_str(day_dinner), inline=False)
+
+    await ctx.send(embed=embed)
+
+    
 @client.command(name="오늘")
 async def meal(ctx):
     set_today()
