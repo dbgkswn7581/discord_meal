@@ -168,7 +168,7 @@ def set_meal():
 async def on_ready():
     global today_lunch, today_dinner, tomorrow_lunch, tomorrow_dinner
 
-    print(client.user.id)
+    # print(client.user.id)
     print("ready")
     game = discord.Game("전라고 급식 서비스 제공")
     await client.change_presence(status = discord.Status.online, activity = game)
@@ -244,6 +244,7 @@ async def meal(ctx, *text):
 @client.command(name="오늘")
 async def meal(ctx):
     set_today()
+    set_tomorrow()
     set_meal()
 
     if today_lunch == "Nope" and today_dinner == "Nope":
@@ -276,6 +277,7 @@ async def meal(ctx):
 @client.command(name="내일")
 async def meal(ctx):
     set_today()
+    set_tomorrow()
     set_meal()
     if tomorrow_lunch == "Nope" and tomorrow_dinner == "Nope":
         embed = discord.Embed(title = "Error",
@@ -302,6 +304,20 @@ async def meal(ctx):
     embed.add_field(name="중식", value=list_to_str(tomorrow_lunch), inline=False)
     embed.add_field(name="석식", value=list_to_str(tomorrow_dinner), inline=False)
 
+    await ctx.send(embed=embed)
+
+@client.command(name="check")
+async def meal(ctx):
+    set_today()
+    set_tomorrow()
+
+    embed = discord.Embed(title = "Check",
+    description = "today 변수 값 : " + today, color = discord.Color.green()
+    )
+    await ctx.send(embed=embed)
+    embed = discord.Embed(title = "Check",
+    description = "tomorrow 변수 값 : " + tomorrow, color = discord.Color.green()
+    )
     await ctx.send(embed=embed)
 
 
