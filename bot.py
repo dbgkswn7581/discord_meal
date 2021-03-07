@@ -34,6 +34,8 @@ def set_today():
 def set_tomorrow():
     global tomorrow
 
+    set_today()
+
     tomorrow = str(int(today) + 1)
 
     # tom_month = int(tomorrow[4:6])
@@ -151,17 +153,20 @@ class makeError(Exception):
         super().__init__('급식 정보가 없습니다.')
 
 
-def set_meal():
-    global today_lunch, today_dinner, tomorrow_dinner, tomorrow_lunch
-    # ----------------------------
+def set_meal_today():
+    global today_lunch, today_dinner
 
     today_lunch = get_meal_lunch(today)
     today_dinner = get_meal_dinner(today)
 
-    # ----------------------------
+def set_meal_tomorrow():
+    global tomorrow_lunch, tomorrow_dinner
 
     tomorrow_lunch = get_meal_lunch(tomorrow)
     tomorrow_dinner = get_meal_dinner(tomorrow)
+
+
+
 #================================================================================================================================================
 
 @client.event
@@ -172,10 +177,8 @@ async def on_ready():
     print("ready")
     game = discord.Game("전라고 급식 서비스 제공")
     await client.change_presence(status = discord.Status.online, activity = game)
-    set_today()
-    set_tomorrow()
 
-    set_meal()
+
 
     
 
@@ -244,8 +247,7 @@ async def meal(ctx, *text):
 @client.command(name="오늘")
 async def meal(ctx):
     set_today()
-    set_tomorrow()
-    set_meal()
+    set_meal_today()
 
     if today_lunch == "Nope" and today_dinner == "Nope":
         embed = discord.Embed(title = "Error",
@@ -276,9 +278,9 @@ async def meal(ctx):
 
 @client.command(name="내일")
 async def meal(ctx):
-    set_today()
     set_tomorrow()
-    set_meal()
+    set_meal_tomorrow()
+
     if tomorrow_lunch == "Nope" and tomorrow_dinner == "Nope":
         embed = discord.Embed(title = "Error",
         description = "급식 정보가 없습니다.", color = discord.Color.red()
@@ -312,13 +314,10 @@ async def meal(ctx):
     set_tomorrow()
 
     embed = discord.Embed(title = "Check",
-    description = "today 변수 값 : " + today, color = discord.Color.green()
+    description = "today 변수 값 : %s\ntomorrow 변수 값 : %s" %(today, tomorrow), color = discord.Color.green()
     )
     await ctx.send(embed=embed)
-    embed = discord.Embed(title = "Check",
-    description = "tomorrow 변수 값 : " + tomorrow, color = discord.Color.green()
-    )
-    await ctx.send(embed=embed)
+
 
 
 client.run(os.environ['token'])
