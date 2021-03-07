@@ -4,6 +4,7 @@ import urllib.request
 import discord
 from discord.ext import commands
 import os
+import time
 
 # Client Id : 816671240293974066
 # Client Token : 
@@ -312,18 +313,23 @@ async def meal(ctx):
 async def meal(ctx):
     set_today()
     set_tomorrow()
-    now = time.localtime()
+    
     
     embed = discord.Embed(title = "Check",
     description = "today 변수 값 : %s\ntomorrow 변수 값 : %s" %(today, tomorrow), color = discord.Color.green()
     )
     
-    embed.add_field(name="Time", value="%04d/%02d/%02d %02d:%02d:%02d"%(now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec), inline=False)
-
+    
     await ctx.send(embed=embed)
-    
-    
 
+@client.command(name="time")
+    async def meal(ctx):
+        now = time.localtime()
+    
+        embed = discord.Embed(title = "Time",
+        description = "%04d/%02d/%02d %02d:%02d:%02d" %(now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec), color = discord.Color.orange()
+        )
+        await ctx.send(embed=embed)
 
 
 client.run(os.environ['token'])
