@@ -325,9 +325,65 @@ async def meal(ctx):
 @client.command(name="time")
 async def meal(ctx):
     now = time.localtime() 
+    timon = now.tm_mon
+    tiday = now.tm_mday
+    tihour = now.tm_hour
+    tihour = tihour + 9
+    if tihour >= 24:
+        tihour = tihour - 24
+        tiday += 1
+        if timon == 3:
+            if tiday >= 32:
+                tiday = 1
+                timon += 1
+        elif timon ==  4 :
+            if tiday >=  31 :
+                tiday = 1
+                timon += 1
+        elif timon ==  5 :
+            if tiday >=  32 :
+                tiday = 1
+                timon += 1
+        elif timon ==  6 :
+            if tiday >=  31 :
+                tiday = 1
+                timon += 1
+        elif timon ==  7 :
+            if tiday >=  32 :
+                tiday = 1
+                timon += 1
+        elif timon ==  8 :
+            if tiday >=  32 :
+                tiday = 1
+                timon += 1
+        elif timon ==  9 :
+            if tiday >=  31 :
+                tiday = 1
+                timon += 1
+        elif timon ==  10 :
+            if tiday >=  32 :
+                tiday = 1
+                timon += 1
+        elif timon ==  11 :
+            if tiday >=  31 :
+                tiday = 1
+                timon += 1
+        elif timon ==  12 :
+            if tiday >=  32 :
+                tiday = 1
+                timon += 1
+        elif timon ==  1 :
+            if tiday >=  32 :
+                tiday = 1
+                timon += 1
+        elif timon ==  2 :
+            if tiday >=  29 :
+                tiday = 1
+                timon += 1
 
+        
     embed = discord.Embed(title = "Time",
-    description = "%04d/%02d/%02d %02d:%02d:%02d" %(now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour+9, now.tm_min, now.tm_sec), color = discord.Color.orange()
+    description = "%04d/%02d/%02d %02d:%02d:%02d" %(now.tm_year, timon, tiday, tihour, now.tm_min, now.tm_sec), color = discord.Color.orange()
     )
     await ctx.send(embed=embed)
 
